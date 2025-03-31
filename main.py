@@ -2,22 +2,42 @@ import streamlit as st
 import pandas as pd
 import subprocess
 import sys
-
-try:
-    import joblib
-except ImportError:
-    subprocess.run([sys.executable, "-m", "pip", "install", "joblib"])
-    import joblib  # Retry import
-
+import joblib
+import requests
+import torch
 from pytorch_tabnet.tab_model import TabNetRegressor
+from io import BytesIO
 
-# Load the dataset
-df = pd.read_csv("/Users/chandrus/development/imdb_top_1000.csv")
+# Define GitHub raw file URLs
+GITHUB_BASE_URL = "https://raw.githubusercontent.com/Chandru03/imdbModel/master/"
+DATASET_URL = GITHUB_BASE_URL + "imdb_top_1000.csv"
+MODEL_URL = GITHUB_BASE_URL + "tabnet_imdb.zip"
+SCALER_URL = GITHUB_BASE_URL + "scaler.pkl"
 
-# Load the trained model & scaler
+
+# Function to download files
+def download_file(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return BytesIO(response.content)
+    else:
+        st.error(f"Failed to download {url}")
+        return None
+
+
+# Load dataset
+df = pd.read_csv(DATASET_URL)
+
+# Load trained model
 model = TabNetRegressor()
-model.load_model("tabnet_imdb.zip")
-scaler = joblib.load("scaler.pkl")
+model_path = download_file(MODEL_URL)
+if model_path:
+    model.load_model(model_path)
+
+# Load scaler
+scaler_path = download_file(SCALER_URL)
+if scaler_path:
+    scaler = joblib.load(scaler_path)
 
 # Configure page
 st.set_page_config(page_title="🍿 Movie Rating Predictor", layout="wide")
@@ -62,7 +82,11 @@ with col2:
             # Make prediction
             input_features = [runtime, metascore, votes]
             scaled_features = scaler.transform([input_features])
-            prediction = model.predict(scaled_features)
+            input_tensor = torch.tensor(scaled_features, dtype=torch.float32)
+
+            with torch.no_grad():
+                prediction = model.predict(input_tensor)
+
             predicted_rating = round(prediction[0][0], 1)
 
             # Display rating with style
@@ -77,7 +101,6 @@ with col2:
             if predicted_rating >= 8:
                 st.balloons()
                 st.success("⭐ Blockbuster Alert! This could be the next big hit!")
-                st.image("https://i.gifer.com/7efs.gif", caption="Crowd cheering!")
             elif 6 <= predicted_rating < 8:
                 st.info("🎥 Solid Performer! Worth a watch!")
             else:
