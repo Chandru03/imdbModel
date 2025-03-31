@@ -1,6 +1,14 @@
 import streamlit as st
 import pandas as pd
-import joblib
+import subprocess
+import sys
+
+try:
+    import joblib
+except ImportError:
+    subprocess.run([sys.executable, "-m", "pip", "install", "joblib"])
+    import joblib  # Retry import
+
 from pytorch_tabnet.tab_model import TabNetRegressor
 
 # Load the dataset
