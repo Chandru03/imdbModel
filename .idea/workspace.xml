@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91f2cfaf-055a-4f51-a4d8-44c340bcfc4a" name="Changes" comment="csv file added">
+    <list default="true" id="91f2cfaf-055a-4f51-a4d8-44c340bcfc4a" name="Changes" comment="fixed url issue">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +81,7 @@
       <option name="presentableId" value="Default" />
       <updated>1742492732806</updated>
       <workItem from="1742493277627" duration="15822000" />
-      <workItem from="1743433298149" duration="2960000" />
+      <workItem from="1743433298149" duration="3781000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -130,7 +131,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743436624027</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fixed url issue">
+      <option name="closed" value="true" />
+      <created>1743436733319</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1743436733319</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,7 +150,8 @@
     <MESSAGE value="requirements file added" />
     <MESSAGE value="fixed joblib file added" />
     <MESSAGE value="csv file added" />
-    <option name="LAST_COMMIT_MESSAGE" value="csv file added" />
+    <MESSAGE value="fixed url issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed url issue" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/imdbModel$main.coverage" NAME="main Coverage Results" MODIFIED="1742547894178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
