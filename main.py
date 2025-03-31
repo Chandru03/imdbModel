@@ -109,4 +109,3 @@ with col2:
             <p>Your prediction will appear here</p>
         </div>
         """, unsafe_allow_html=True)
-        st.image("https://i.gifer.com/7EeN.gif", caption="Ready for predictions!")
